@@ -2,11 +2,13 @@
   <div class="container">
     <div id="app">
       <vHeader />
-      <vTable :users="filteredUsers" @sort-by="sortBy" />
+      <vTable :users="filteredUsers" :sortBy="sortBy" @sort="sort" />
       <vTablePagination
         v-if="isLoaded"
         :currentPage="currentPage"
         :pageCount="pageCount"
+        :usersPerPage="usersPerPage"
+        @set-user-count="setUserCount"
         @set-current-page="setCurrentPage"
         @set-next-page="setNextPage"
         @set-prev-page="setPrevPage"
@@ -26,7 +28,7 @@ export default {
     return {
       isLoaded: false,
       users: null,
-      filterProps: null,
+      sortBy: null,
       currentPage: 1,
       usersPerPage: 20,
     };
@@ -63,26 +65,52 @@ export default {
     setPrevPage() {
       this.currentPage = this.currentPage != 1 ? this.currentPage - 1 : 1;
     },
-    sortBy(prop) {
-      console.log(prop);
-      this.filterProps = prop;
+    setUserCount(val) {
+      this.usersPerPage = val;
+    },
+    sort(prop) {
+      this.currentPage = 1;
+      if (this.sortBy === prop) {
+        this.sortBy = null;
+      } else this.sortBy = prop;
     },
   },
   computed: {
     filteredUsers() {
       let userList = null;
-      switch (this.filterProps) {
-        case "id asc":
-          console.log("tttttt");
-          userList = this.users.safeSortByObjParam("id");
-          break;
-        case "id desc":
-          userList = this.users.safeSortByObjParam("id", "desc");
-          break;
-        default:
-          userList = this.users;
-          break;
-      }
+      // switch (this.sortBy) {
+      //   case "id asc":
+      //     userList = this.users.safeSortByObjParam("id");
+      //     break;
+      //   case "id desc":
+      //     userList = this.users.safeSortByObjParam("id", "desc");
+      //     break;
+      //   case "firstName asc":
+      //     userList = this.users.safeSortByObjParam("firstName");
+      //     break;
+      //   case "firstName desc":
+      //     userList = this.users.safeSortByObjParam("firstName", "desc");
+      //     break;
+      //   case "lastName asc":
+      //     userList = this.users.safeSortByObjParam("lastName");
+      //     break;
+      //   case "lastName desc":
+      //     userList = this.users.safeSortByObjParam("lastName", "desc");
+      //     break;
+      //   // case "id asc":
+      //   //   userList = this.users.safeSortByObjParam("id");
+      //   //   break;
+      //   // case "id desc":
+      //   //   userList = this.users.safeSortByObjParam("id", "desc");
+      //   //   break;
+      //   default:
+      //     userList = this.users;
+      //     break;
+      // }
+      if (this.sortBy) {
+        let params = this.sortBy.split(" ");
+        userList = this.users.safeSortByObjParam(params[0], params[1]);
+      } else userList = this.users;
       return userList?.slice(
         this.usersPerPage * (this.currentPage - 1),
         this.usersPerPage * this.currentPage

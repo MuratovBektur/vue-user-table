@@ -1,9 +1,11 @@
 <template>
-  <div class="v-table-pagination">
-    <nav aria-label="Page navigation example">
-      <ul class="pagination justify-content-center">
+  <div class="v-table-pagination row">
+    <nav class="col-12 col-md-6" aria-label="Page navigation example">
+      <ul
+        class="pagination justify-content-center justify-content-md-start justify-content-lg-end"
+      >
         <li class="page-item" @click="$emit('set-prev-page')">
-          <a class="page-link" href="#" aria-label="Previous">
+          <a class="page-link" aria-label="Previous">
             <span aria-hidden="true">&laquo;</span>
           </a>
         </li>
@@ -267,17 +269,27 @@
         </template>
 
         <li class="page-item" @click="$emit('set-next-page')">
-          <a class="page-link" href="#" aria-label="Next">
+          <a class="page-link" aria-label="Next">
             <span aria-hidden="true">&raquo;</span>
           </a>
         </li>
       </ul>
     </nav>
+    <div
+      class="col-12 col-md-6 d-flex justify-content-center justify-content-md-start align-items-center mt-3 mt-md-0"
+    >
+      <span class="me-3">Кол-во пользователей</span>
+      <select class="form-select" v-model="usersNum">
+        <option value="10">10</option>
+        <option value="20">20</option>
+        <option value="50">50</option>
+        <option value="100">100</option>
+      </select>
+    </div>
   </div>
 </template>
-<script>
-//
 
+<script>
 export default {
   props: {
     currentPage: {
@@ -285,12 +297,27 @@ export default {
       default: 1,
     },
     pageCount: Number,
+    usersPerPage: [Number, String],
+  },
+  computed: {
+    usersNum: {
+      get() {
+        return this.usersPerPage;
+      },
+      set(val) {
+        this.$emit("set-user-count", val);
+      },
+    },
   },
 };
 </script>
 
 <style lang="scss">
 .v-table-pagination {
+  margin-bottom: 30px;
+  .pagination {
+    margin-bottom: 0;
+  }
   .pagination > li > a {
     background-color: white;
     color: #212529;
@@ -325,6 +352,9 @@ export default {
   .pagination > .active > a:hover {
     background-color: #5a4181 !important;
     border: solid 1px #5a4181;
+  }
+  .form-select {
+    width: 200px;
   }
 }
 </style>
