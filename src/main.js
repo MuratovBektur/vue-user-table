@@ -10,6 +10,9 @@ import "./assets/index.scss";
 import App from "./App.vue";
 
 Vue.config.productionTip = false;
+Vue.config.errorHandler = function(err, vm, info) {
+  console.log(`Error: ${err.toString()}\nInfo: ${info}`);
+}
 
 new Vue({
   render: (h) => h(App),

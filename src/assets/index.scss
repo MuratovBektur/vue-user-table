@@ -1,1 +1,9 @@
 @import "./components/tooltip.scss";
+
+:root {
+    --tooltip-left-position: 50%;
+    --tooltip-right-position: auto;
+    --tooltip-left-after-position: 15px;
+    --tooltip-right-after-position: auto;
+    --tooltip-margins: 0 0 0 -50%;
+}

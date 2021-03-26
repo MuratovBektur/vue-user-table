@@ -127,18 +127,11 @@
       <tbody>
         <tr v-for="user in users" :key="user.id + user.firstName">
           <th scope="row">
-            <!-- <span class="tooltiptext">Tooltip text</span> -->
-            <!-- <div class="tooltip"> -->
-            <!-- <span
-              data-bs-toggle="tooltip"
-              title=""
-              data-bs-original-title="Default tooltip"
-            > -->
-            <div class="tooltip ">
+            <div class="tooltip" @mouseenter="changePositionToLeft">
               {{ user.id }}
               <span class="tooltiptext">
                 Выбран пользователь
-                <b>{{ user.firstName + user.lastName }}</b>
+                <b>{{ user.firstName + " " + user.lastName }}</b>
                 <br />
                 <br />
 
@@ -160,15 +153,119 @@
                 <b>{{ user.address.zip }}</b>
               </span>
             </div>
-
-            <!-- </span> -->
-            <!-- <span class="tooltiptext">Tooltip text</span> -->
-            <!-- </div> -->
           </th>
-          <td>{{ user.firstName }}</td>
-          <td>{{ user.lastName }}</td>
-          <td>{{ user.email }}</td>
-          <td>{{ user.phone }}</td>
+          <td>
+            <div class="tooltip" @mouseenter="changePositionToLeft">
+              {{ user.firstName }}
+              <span class="tooltiptext">
+                Выбран пользователь
+                <b>{{ user.firstName + " " + user.lastName }}</b>
+                <br />
+                <br />
+
+                Описание: {{ user.description }}
+
+                <br />
+                <br />
+
+                Адрес проживания:
+                <b>{{ user.address.streetAddress }}</b>
+                <br />
+                Город:
+                <b>{{ user.address.city }}</b>
+                <br />
+                Провинция/штат:
+                <b>{{ user.address.state }}</b>
+                <br />
+                Индекс:
+                <b>{{ user.address.zip }}</b>
+              </span>
+            </div>
+          </td>
+          <td>
+            <div class="tooltip" @mouseenter="changePositionToCenter">
+              {{ user.lastName }}
+              <span class="tooltiptext">
+                Выбран пользователь
+                <b>{{ user.firstName + " " + user.lastName }}</b>
+                <br />
+                <br />
+
+                Описание: {{ user.description }}
+
+                <br />
+                <br />
+
+                Адрес проживания:
+                <b>{{ user.address.streetAddress }}</b>
+                <br />
+                Город:
+                <b>{{ user.address.city }}</b>
+                <br />
+                Провинция/штат:
+                <b>{{ user.address.state }}</b>
+                <br />
+                Индекс:
+                <b>{{ user.address.zip }}</b>
+              </span>
+            </div>
+          </td>
+          <td>
+            <div class="tooltip" @mouseenter="changePositionToRight">
+              {{ user.email }}
+              <span class="tooltiptext">
+                Выбран пользователь
+                <b>{{ user.firstName + " " + user.lastName }}</b>
+                <br />
+                <br />
+
+                Описание: {{ user.description }}
+
+                <br />
+                <br />
+
+                Адрес проживания:
+                <b>{{ user.address.streetAddress }}</b>
+                <br />
+                Город:
+                <b>{{ user.address.city }}</b>
+                <br />
+                Провинция/штат:
+                <b>{{ user.address.state }}</b>
+                <br />
+                Индекс:
+                <b>{{ user.address.zip }}</b>
+              </span>
+            </div>
+          </td>
+          <td>
+            <div class="tooltip" @mouseenter="changePositionToRight">
+              {{ user.phone }}
+              <span class="tooltiptext">
+                Выбран пользователь
+                <b>{{ user.firstName + " " + user.lastName }}</b>
+                <br />
+                <br />
+
+                Описание: {{ user.description }}
+
+                <br />
+                <br />
+
+                Адрес проживания:
+                <b>{{ user.address.streetAddress }}</b>
+                <br />
+                Город:
+                <b>{{ user.address.city }}</b>
+                <br />
+                Провинция/штат:
+                <b>{{ user.address.state }}</b>
+                <br />
+                Индекс:
+                <b>{{ user.address.zip }}</b>
+              </span>
+            </div>
+          </td>
         </tr>
       </tbody>
     </table>
@@ -192,40 +289,6 @@ export default {
   props: {
     users: {
       type: Array,
-      // default: function() {
-      //   return [
-      //     {
-      //       id: 331,
-      //       firstName: "Yolunda",
-      //       lastName: "Psarros",
-      //       email: "PWing@nunc.net",
-      //       phone: "(692)117-1280",
-      //       address: {
-      //         streetAddress: "8597 Porttitor Ct",
-      //         city: "Spokane",
-      //         state: "MO",
-      //         zip: "26157",
-      //       },
-      //       description:
-      //         "consequat nec sed nullam sollicitudin vestibulum sollicitudin porta ac augue convallis amet sed porta odio massa ac mi tellus amet pharetra pretium tincidunt quis molestie tortor sapien elementum vestibulum quis sollicitudin vestibulum",
-      //     },
-      //     {
-      //       id: 842,
-      //       firstName: "Paul",
-      //       lastName: "Tarbox",
-      //       email: "RWarren@tortor.io",
-      //       phone: "(800)600-4117",
-      //       address: {
-      //         streetAddress: "8969 Lectus Ln",
-      //         city: "Woodlawn",
-      //         state: "IN",
-      //         zip: "68024",
-      //       },
-      //       description:
-      //         "odio porta eget sit ante augue magna sagittis placerat facilisis turpis nec egestas etiam at tortor dolor tortor vel turpis consectetur aliquam dolor suspendisse consectetur mattis nullam porta lacus turpis mi vestibulum",
-      //     },
-      //   ];
-      // },
     },
     sortBy: String,
   },
@@ -233,6 +296,27 @@ export default {
   methods: {
     sort(props) {
       this.$emit("sort", props);
+    },
+    changePositionToRight() {
+      let root = document.documentElement;
+      root.style.setProperty("--tooltip-left-position", "auto");
+      root.style.setProperty("--tooltip-right-position", "50%");
+      root.style.setProperty("--tooltip-left-after-position", "auto");
+      root.style.setProperty("--tooltip-right-after-position", "15px");
+    },
+    changePositionToLeft() {
+      let root = document.documentElement;
+      root.style.setProperty("--tooltip-left-position", "50%");
+      root.style.setProperty("--tooltip-right-position", "auto");
+      root.style.setProperty("--tooltip-left-after-position", "15px");
+      root.style.setProperty("--tooltip-right-after-position", "auto");
+    },
+    changePositionToCenter() {
+      let root = document.documentElement;
+      root.style.setProperty("--tooltip-left-position", "50%");
+      root.style.setProperty("--tooltip-right-position", "auto");
+      root.style.setProperty("--tooltip-left-after-position", "15px");
+      root.style.setProperty("--tooltip-right-after-position", "auto");
     },
   },
 };
@@ -242,7 +326,8 @@ export default {
 .v-table {
   padding: 20px 0;
   // width: 920px;
-  overflow: auto;
+  overflow-x: auto;
+  overflow-y: hidden;
 
   &__loading-bar {
     position: absolute;

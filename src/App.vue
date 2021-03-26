@@ -1,6 +1,6 @@
 <template>
   <div class="container">
-    <div id="app">
+    <div id="app" v-if="!error">
       <vHeader />
       <vTable :users="filteredUsers" :sortBy="sortBy" @sort="sort" />
       <vTablePagination
@@ -13,6 +13,12 @@
         @set-next-page="setNextPage"
         @set-prev-page="setPrevPage"
       />
+    </div>
+    <div class="d-flex justify-content-center" v-else>
+      <img src="./assets/img/error.svg" alt="error" />
+      <h1 align="center" class="mt-5">
+        Error
+      </h1>
     </div>
   </div>
 </template>
@@ -31,6 +37,7 @@ export default {
       sortBy: null,
       currentPage: 1,
       usersPerPage: 20,
+      error: null,
     };
   },
   components: {
@@ -48,6 +55,7 @@ export default {
       this.users = res.data;
       this.isLoaded = true;
     } catch (e) {
+      this.error = e;
       console.error(e);
     }
   },
