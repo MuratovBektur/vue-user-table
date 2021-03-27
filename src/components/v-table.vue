@@ -1,5 +1,5 @@
 <template>
-  <div class="v-table">
+  <div class="v-table mt-5">
     <table v-if="users" class="table  table-striped">
       <thead>
         <tr class="table-dark">
@@ -135,22 +135,25 @@
                 <br />
                 <br />
 
-                Описание: {{ user.description }}
+                <template v-if="user.description">
+                  Описание: {{ user.description }}
 
-                <br />
-                <br />
-
-                Адрес проживания:
-                <b>{{ user.address.streetAddress }}</b>
-                <br />
-                Город:
-                <b>{{ user.address.city }}</b>
-                <br />
-                Провинция/штат:
-                <b>{{ user.address.state }}</b>
-                <br />
-                Индекс:
-                <b>{{ user.address.zip }}</b>
+                  <br />
+                  <br />
+                </template>
+                <template v-if="user.address">
+                  Адрес проживания:
+                  <b>{{ user.address.streetAddress }}</b>
+                  <br />
+                  Город:
+                  <b>{{ user.address.city }}</b>
+                  <br />
+                  Провинция/штат:
+                  <b>{{ user.address.state }}</b>
+                  <br />
+                  Индекс:
+                  <b>{{ user.address.zip }}</b>
+                </template>
               </span>
             </div>
           </th>
@@ -162,23 +165,25 @@
                 <b>{{ user.firstName + " " + user.lastName }}</b>
                 <br />
                 <br />
+                <template v-if="user.description">
+                  Описание: {{ user.description }}
 
-                Описание: {{ user.description }}
-
-                <br />
-                <br />
-
-                Адрес проживания:
-                <b>{{ user.address.streetAddress }}</b>
-                <br />
-                Город:
-                <b>{{ user.address.city }}</b>
-                <br />
-                Провинция/штат:
-                <b>{{ user.address.state }}</b>
-                <br />
-                Индекс:
-                <b>{{ user.address.zip }}</b>
+                  <br />
+                  <br />
+                </template>
+                <template v-if="user.address">
+                  Адрес проживания:
+                  <b>{{ user.address.streetAddress }}</b>
+                  <br />
+                  Город:
+                  <b>{{ user.address.city }}</b>
+                  <br />
+                  Провинция/штат:
+                  <b>{{ user.address.state }}</b>
+                  <br />
+                  Индекс:
+                  <b>{{ user.address.zip }}</b>
+                </template>
               </span>
             </div>
           </td>
@@ -190,23 +195,25 @@
                 <b>{{ user.firstName + " " + user.lastName }}</b>
                 <br />
                 <br />
+                <template v-if="user.description">
+                  Описание: {{ user.description }}
 
-                Описание: {{ user.description }}
-
-                <br />
-                <br />
-
-                Адрес проживания:
-                <b>{{ user.address.streetAddress }}</b>
-                <br />
-                Город:
-                <b>{{ user.address.city }}</b>
-                <br />
-                Провинция/штат:
-                <b>{{ user.address.state }}</b>
-                <br />
-                Индекс:
-                <b>{{ user.address.zip }}</b>
+                  <br />
+                  <br />
+                </template>
+                <template v-if="user.address">
+                  Адрес проживания:
+                  <b>{{ user.address.streetAddress }}</b>
+                  <br />
+                  Город:
+                  <b>{{ user.address.city }}</b>
+                  <br />
+                  Провинция/штат:
+                  <b>{{ user.address.state }}</b>
+                  <br />
+                  Индекс:
+                  <b>{{ user.address.zip }}</b>
+                </template>
               </span>
             </div>
           </td>
@@ -218,23 +225,25 @@
                 <b>{{ user.firstName + " " + user.lastName }}</b>
                 <br />
                 <br />
+                <template v-if="user.description">
+                  Описание: {{ user.description }}
 
-                Описание: {{ user.description }}
-
-                <br />
-                <br />
-
-                Адрес проживания:
-                <b>{{ user.address.streetAddress }}</b>
-                <br />
-                Город:
-                <b>{{ user.address.city }}</b>
-                <br />
-                Провинция/штат:
-                <b>{{ user.address.state }}</b>
-                <br />
-                Индекс:
-                <b>{{ user.address.zip }}</b>
+                  <br />
+                  <br />
+                </template>
+                <template v-if="user.address">
+                  Адрес проживания:
+                  <b>{{ user.address.streetAddress }}</b>
+                  <br />
+                  Город:
+                  <b>{{ user.address.city }}</b>
+                  <br />
+                  Провинция/штат:
+                  <b>{{ user.address.state }}</b>
+                  <br />
+                  Индекс:
+                  <b>{{ user.address.zip }}</b>
+                </template>
               </span>
             </div>
           </td>
@@ -246,23 +255,25 @@
                 <b>{{ user.firstName + " " + user.lastName }}</b>
                 <br />
                 <br />
+                <template v-if="user.description">
+                  Описание: {{ user.description }}
 
-                Описание: {{ user.description }}
-
-                <br />
-                <br />
-
-                Адрес проживания:
-                <b>{{ user.address.streetAddress }}</b>
-                <br />
-                Город:
-                <b>{{ user.address.city }}</b>
-                <br />
-                Провинция/штат:
-                <b>{{ user.address.state }}</b>
-                <br />
-                Индекс:
-                <b>{{ user.address.zip }}</b>
+                  <br />
+                  <br />
+                </template>
+                <template v-if="user.address">
+                  Адрес проживания:
+                  <b>{{ user.address.streetAddress }}</b>
+                  <br />
+                  Город:
+                  <b>{{ user.address.city }}</b>
+                  <br />
+                  Провинция/штат:
+                  <b>{{ user.address.state }}</b>
+                  <br />
+                  Индекс:
+                  <b>{{ user.address.zip }}</b>
+                </template>
               </span>
             </div>
           </td>
@@ -324,11 +335,6 @@ export default {
 
 <style lang="scss">
 .v-table {
-  padding: 20px 0;
-  // width: 920px;
-  overflow-x: auto;
-  overflow-y: hidden;
-
   &__loading-bar {
     position: absolute;
     top: 50%;
@@ -357,6 +363,12 @@ export default {
     display: flex;
     justify-content: center;
     align-items: center;
+  }
+}
+@media screen and (max-width: 768px) {
+  .v-table {
+    overflow-x: auto;
+    overflow-y: hidden;
   }
 }
 </style>

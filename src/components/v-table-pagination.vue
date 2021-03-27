@@ -1,5 +1,5 @@
 <template>
-  <div class="v-table-pagination row">
+  <div class="v-table-pagination row my-5">
     <nav class="col-12 col-md-6" aria-label="Page navigation example">
       <ul
         class="pagination justify-content-center justify-content-md-start justify-content-lg-end"
@@ -314,7 +314,6 @@ export default {
 
 <style lang="scss">
 .v-table-pagination {
-  margin-bottom: 30px;
   .pagination {
     margin-bottom: 0;
   }

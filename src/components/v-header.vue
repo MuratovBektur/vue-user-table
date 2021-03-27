@@ -3,18 +3,37 @@
     <nav class="navbar navbar-dark bg-dark">
       <div class="container-fluid">
         <a class="navbar-brand">User Table</a>
-        <form class="d-flex">
+        <div class="d-flex">
           <input
             class="form-control me-2"
             type="search"
             placeholder="Search"
             aria-label="Search"
+            v-model="searchInput"
           />
-          <button class="btn btn-outline-light" type="submit">
-            Search
+          <button @click="onSearch" class="btn btn-outline-light" type="submit">
+            Найти
           </button>
-        </form>
+        </div>
       </div>
     </nav>
   </header>
 </template>
+
+<script>
+export default {
+  data() {
+    return {
+      searchInput: "",
+    };
+  },
+  methods: {
+    onSearch() {
+      if (this.searchInput != null && this.searchInput !== "") {
+        this.$emit("on-search", this.searchInput);
+        this.searchInput = "";
+      }
+    },
+  },
+};
+</script>
