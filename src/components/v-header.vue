@@ -2,7 +2,9 @@
   <header>
     <nav class="navbar navbar-dark bg-dark">
       <div class="container-fluid">
-        <a class="navbar-brand noselect">User Table</a>
+        <a class="navbar-brand noselect" @click="$emit('show-all-user')"
+          >User Table</a
+        >
         <div class="d-flex">
           <input
             class="form-control me-2"
@@ -10,6 +12,8 @@
             placeholder="Search"
             aria-label="Search"
             v-model="searchInput"
+            @keyup.enter="onSearch"
+          />
           />
           <button @click="onSearch" class="btn btn-outline-light" type="submit">
             Найти

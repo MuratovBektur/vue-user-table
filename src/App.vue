@@ -2,7 +2,7 @@
   <div class="container px-0">
     <div id="app" v-if="!error">
       <div v-if="selectedDB">
-        <vHeader @on-search="onSearch" />
+        <vHeader @on-search="onSearch" @show-all-user="filterBy = ''" />
         <div v-if="isLoaded" class="d-flex justify-content-center mt-5">
           <button class="btn btn-primary" @click="showForm = !showForm">
             {{ showForm ? "Убрать" : "Добавить" }}
@@ -33,11 +33,12 @@
         </button>
       </div>
     </div>
-    <div class="h-100 d-flex justify-content-center align-items-center" v-else>
-      <img src="./assets/img/error.svg" alt="error" />
-      <h1 align="center" class="mt-5">
-        Error
-      </h1>
+    <div
+      class="h-100 d-flex flex-column justify-content-center align-items-center"
+      v-else
+    >
+      <img src="./assets/img/error.png" alt="error" />
+      <h1 align="center" class="mt-5">Error {{ error && error.name }}</h1>
     </div>
     <div v-show="showNotification" class="my-notification">
       <!-- <div class="my-notification"> -->
@@ -56,6 +57,7 @@ import "aos/dist/aos.css";
 
 import { vHeader, vTable, vTablePagination, vAddUserForm } from "./components";
 import "./util/safeSort";
+import "./util/numberToLowerCase";
 import smallDB from "./db/small-db.json";
 import bigDB from "./db/big-db.json";
 
@@ -100,14 +102,11 @@ export default {
         });
       // console.log(this.queryParams);
       Object.entries(this.queryParams).forEach(([key, value]) => {
-        // if (key === "currentPage") {
-        //   this[key] = +value;
-        //   console.log("ttt", key, value);
-        // } else
-        this[key] = value;
-
-        console.log(key, value);
+        if (value != null || value === "") {
+          this[key] = value;
+        }
       });
+
       await this.sleep(2000);
 
       if (this.selectedDB === "small") this.users = smallDB;
@@ -117,6 +116,16 @@ export default {
         this.isLoaded = true;
       }
       this.url = new URL(window.location.href);
+
+      if (
+        !this.queryParams.currentPage ||
+        this.queryParams.currentPage > this.pageCount
+      ) {
+        this.currentPage = 1;
+        this.url?.searchParams.set("currentPage", 1);
+        window.history.replaceState(null, null, this.url);
+      } else this.currentPage = this.queryParams.currentPage;
+
       this.afterMount = true;
 
       // const url =
@@ -182,32 +191,20 @@ export default {
       //   case "id desc":
       //     userList = this.users.safeSortByObjParam("id", "desc");
       //     break;
-      //   case "firstName asc":
-      //     userList = this.users.safeSortByObjParam("firstName");
-      //     break;
-      //   case "firstName desc":
-      //     userList = this.users.safeSortByObjParam("firstName", "desc");
-      //     break;
-      //   case "lastName asc":
-      //     userList = this.users.safeSortByObjParam("lastName");
-      //     break;
-      //   case "lastName desc":
-      //     userList = this.users.safeSortByObjParam("lastName", "desc");
-      //     break;
-      //   // case "id asc":
-      //   //   userList = this.users.safeSortByObjParam("id");
-      //   //   break;
-      //   // case "id desc":
-      //   //   userList = this.users.safeSortByObjParam("id", "desc");
-      //   //   break;
       //   default:
       //     userList = this.users;
       //     break;
       // }
       if (this.filterBy != null && this.filterBy !== "") {
+        const userProps = ["id", "firstName", "lastName", "email", "phone"];
         userList = userList.filter((user) => {
           if (
-            user?.firstName.toLowerCase().includes(this.filterBy.toLowerCase())
+            userProps.some((prop) => {
+              console.log("test", user[prop]);
+              return user[prop]
+                .toLowerCase()
+                .includes(this.filterBy.toLowerCase());
+            })
           ) {
             return true;
           }
@@ -278,7 +275,8 @@ export default {
       this.url?.searchParams.set("filterBy", this.filterBy);
       window.history.replaceState(null, null, this.url);
     },
-    currentPage() {
+    currentPage(val) {
+      console.log("val", val);
       this.url?.searchParams.set("currentPage", this.currentPage);
       window.history.replaceState(null, null, this.url);
     },

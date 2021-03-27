@@ -1,5 +1,5 @@
 <template>
-  <div class="v-table mt-5">
+  <div class="v-table mt-5 table-responsive-md">
     <table v-if="users" class="table  table-striped">
       <thead>
         <tr class="table-dark">
@@ -374,8 +374,8 @@ export default {
 }
 @media screen and (max-width: 768px) {
   .v-table {
-    overflow-x: auto;
-    overflow-y: hidden;
+    // overflow-x: auto;
+    // overflow-y: hidden;
   }
 }
 </style>
