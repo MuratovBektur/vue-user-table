@@ -1,5 +1,9 @@
 <template>
-  <div class="v-add-form mt-4" data-aos="fade-down" data-aos-duration="200">
+  <div
+    class="v-add-form mt-4 px-4"
+    data-aos="fade-down"
+    data-aos-duration="200"
+  >
     <div class="row">
       <div class="mb-3 col-lg-3">
         <label for="exampleInputId1" class="form-label">Id</label>

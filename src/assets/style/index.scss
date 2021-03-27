@@ -1,23 +1,44 @@
 @import "./components/tooltip.scss";
 
 .h-100 {
-    min-height: 100vh;
+  min-height: 100vh;
+}
+
+.noselect {
+  -webkit-touch-callout: none; /* iOS Safari */
+  -webkit-user-select: none; /* Safari */
+  -khtml-user-select: none; /* Konqueror HTML */
+  -moz-user-select: none; /* Old versions of Firefox */
+  -ms-user-select: none; /* Internet Explorer/Edge */
+  user-select: none; /* Non-prefixed version, currently
+                                    supported by Chrome, Edge, Opera and Firefox */
 }
 
 .my-notification {
-    position: absolute;
-    top: 30px;
-    right: 30px;
-    padding: 5px 20px;
-    display: flex;
-    align-items: center;
-    box-shadow: 0 3px 6px -4px rgb(0 0 0 / 12%), 0 6px 16px 0 rgb(0 0 0 / 8%), 0 9px 28px 8px rgb(0 0 0 / 5%);
+  background-color: white;
+  position: absolute;
+  top: 30px;
+  right: 30px;
+  padding: 5px 20px;
+  display: flex;
+  align-items: center;
+  box-shadow: 0 3px 6px -4px rgb(0 0 0 / 12%), 0 6px 16px 0 rgb(0 0 0 / 8%),
+    0 9px 28px 8px rgb(0 0 0 / 5%);
+}
+
+@media screen and (max-width: 600px) {
+  .my-notification {
+    background-color: black;
+    color: white;
+    top: 10px;
+    right: 10px;
+  }
 }
 
 :root {
-    --tooltip-left-position: 50%;
-    --tooltip-right-position: auto;
-    --tooltip-left-after-position: 15px;
-    --tooltip-right-after-position: auto;
-    --tooltip-margins: 0 0 0 -50%;
+  --tooltip-left-position: 50%;
+  --tooltip-right-position: auto;
+  --tooltip-left-after-position: 15px;
+  --tooltip-right-after-position: auto;
+  --tooltip-margins: 0 0 0 -50%;
 }

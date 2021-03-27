@@ -1,15 +1,15 @@
 <template>
-  <div class="container">
+  <div class="container px-0">
     <div id="app" v-if="!error">
       <div v-if="selectedDB">
         <vHeader @on-search="onSearch" />
-        <div class="d-flex justify-content-center mt-5">
+        <div v-if="isLoaded" class="d-flex justify-content-center mt-5">
           <button class="btn btn-primary" @click="showForm = !showForm">
             {{ showForm ? "Убрать" : "Добавить" }}
           </button>
         </div>
         <vAddUserForm v-if="showForm" @add-user="addUser" />
-        <vTable :users="filteredUsers" :sortBy="sortBy" @sort="sort" />
+        <vTable :users="slicedUsers" :sortBy="sortBy" @sort="sort" />
         <vTablePagination
           v-if="isLoaded"
           :currentPage="currentPage"
@@ -40,6 +40,7 @@
       </h1>
     </div>
     <div v-show="showNotification" class="my-notification">
+      <!-- <div class="my-notification"> -->
       <i
         class="bi bi-check2-circle me-3"
         style="color:green; font-size:30px"
@@ -72,6 +73,9 @@ export default {
       selectedDB: null,
       showForm: false,
       showNotification: false,
+      url: null,
+      queryParams: {},
+      afterMount: false,
     };
   },
   components: {
@@ -85,10 +89,36 @@ export default {
   },
   async mounted() {
     try {
+      console.log(location.search);
+      location.search
+        .substr(1)
+        .split("&")
+        .forEach((item) => {
+          console.log(item);
+          this.$set(this.queryParams, item.split("=")[0], item.split("=")[1]);
+          // this.queryParams[] = ;
+        });
+      // console.log(this.queryParams);
+      Object.entries(this.queryParams).forEach(([key, value]) => {
+        // if (key === "currentPage") {
+        //   this[key] = +value;
+        //   console.log("ttt", key, value);
+        // } else
+        this[key] = value;
+
+        console.log(key, value);
+      });
       await this.sleep(2000);
+
       if (this.selectedDB === "small") this.users = smallDB;
       else if (this.selectedDB === "big") this.users = bigDB;
-      if (this.selectedDB) this.isLoaded = true;
+      if (this.selectedDB) {
+        console.log(this.selectedDB, this.users);
+        this.isLoaded = true;
+      }
+      this.url = new URL(window.location.href);
+      this.afterMount = true;
+
       // const url =
       //   "http://www.filltext.com/?rows=32&id={number|1000}&firstName={firstName}&lastName={lastName}&email={email}&phone={phone|(xxx)xxx-xx-xx}&address={addressObject}&description={lorem|32}";
       // // const url =
@@ -142,7 +172,9 @@ export default {
   computed: {
     filteredUsers() {
       let userList = this.users;
+      console.log("this.filterBy", this.filterBy);
       console.log("userlist", userList);
+      if (!userList) return;
       // switch (this.sortBy) {
       //   case "id asc":
       //     userList = this.users.safeSortByObjParam("id");
@@ -173,24 +205,82 @@ export default {
       //     break;
       // }
       if (this.filterBy != null && this.filterBy !== "") {
-        userList = this.userList.filter((user) => {
-          if (user?.firstName.toLowerCase().includes(this.filterBy))
-            return false;
+        userList = userList.filter((user) => {
+          if (
+            user?.firstName.toLowerCase().includes(this.filterBy.toLowerCase())
+          ) {
+            return true;
+          }
+          return false;
         });
+        console.log("filter", userList);
       }
       if (this.sortBy) {
-        let params = this.sortBy.split(" ");
-        userList = this.userList.safeSortByObjParam(params[0], params[1]);
-      } else userList = this.users;
-      return userList?.slice(
+        let params = this.sortBy.split("_");
+        if (params[0] === "id") {
+          userList = userList.safeSortByObjParam(params[0], params[1]);
+        } else
+          userList = userList.safeSortByObjParam(params[0], params[1], {
+            ignoreCaseSensitive: true,
+          });
+      }
+      return userList;
+    },
+    slicedUsers() {
+      return this.filteredUsers?.slice(
         this.usersPerPage * (this.currentPage - 1),
         this.usersPerPage * this.currentPage
       );
     },
     pageCount() {
-      if (this.users) {
-        return Math.ceil(this.users.length / this.usersPerPage);
+      if (this.filteredUsers) {
+        return Math.ceil(this.filteredUsers.length / this.usersPerPage);
       } else return 1;
+    },
+  },
+  watch: {
+    async selectedDB() {
+      try {
+        await this.sleep(2000);
+        console.log(this.selectedDB, smallDB);
+        if (this.selectedDB === "small") this.users = smallDB;
+        else if (this.selectedDB === "big") this.users = bigDB;
+        if (this.selectedDB) {
+          this.url.searchParams.set("selectedDB", this.selectedDB);
+          window.history.replaceState(null, null, this.url);
+          this.isLoaded = true;
+        }
+        // const url =
+        //   "http://www.filltext.com/?rows=32&id={number|1000}&firstName={firstName}&lastName={lastName}&email={email}&phone={phone|(xxx)xxx-xx-xx}&address={addressObject}&description={lorem|32}";
+        // // const url =
+        // // "http://www.filltext.com/?rows=1000&id={number|1000}&firstName={firstName}&delay=3&lastName={lastName}&email={email}&phone={phone|(xxx)xxx-xx-xx}&address={addressObject}&description={lorem|32}";
+        // const res = await axios(url);
+        // this.users = res.data;
+        // this.isLoaded = true;
+      } catch (e) {
+        this.error = e;
+        console.error(e);
+      }
+    },
+
+    usersPerPage() {
+      if (this.afterMount) this.currentPage = 1;
+      this.url?.searchParams.set("usersPerPage", this.usersPerPage);
+      window.history.replaceState(null, null, this.url);
+    },
+    sortBy() {
+      if (this.afterMount) this.currentPage = 1;
+      this.url?.searchParams.set("sortBy", this.sortBy);
+      window.history.replaceState(null, null, this.url);
+    },
+    filterBy() {
+      if (this.afterMount) this.currentPage = 1;
+      this.url?.searchParams.set("filterBy", this.filterBy);
+      window.history.replaceState(null, null, this.url);
+    },
+    currentPage() {
+      this.url?.searchParams.set("currentPage", this.currentPage);
+      window.history.replaceState(null, null, this.url);
     },
   },
 };
@@ -206,6 +296,7 @@ body {
   -moz-osx-font-smoothing: grayscale;
   /* text-align: center; */
   color: #2c3e50;
+
   /* margin-top: 60px; */
 }
 </style>

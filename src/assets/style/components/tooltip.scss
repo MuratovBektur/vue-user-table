@@ -1,45 +1,46 @@
 .tooltip {
-    position: relative;
-    display: inline-block;
-    opacity: 1;
+  position: relative;
+  display: inline-block;
+  opacity: 1;
+  z-index: initial;
 }
 
 .tooltip .tooltiptext {
-    visibility: hidden;
-    width: 300px;
-    background-color: black;
-    color: #fff;
-    border-radius: 6px;
-    padding: 10px 20px;
-    position: absolute;
-    z-index: 1;
-    top: 150%;
-    left: var(--tooltip-left-position);
-    right: var(--tooltip-right-position);
-    margin: var(--tooltip-margins);
+  visibility: hidden;
+  width: 300px;
+  background-color: black;
+  color: #fff;
+  border-radius: 6px;
+  padding: 10px 20px;
+  position: absolute;
+  z-index: 1;
+  top: 150%;
+  left: var(--tooltip-left-position);
+  right: var(--tooltip-right-position);
+  margin: var(--tooltip-margins);
 }
 
 .tooltip .tooltiptext::after {
-    content: "";
-    position: absolute;
-    bottom: 100%;
-    left: var(--tooltip-left-after-position);
-    right: var(--tooltip-right-after-position);
+  content: "";
+  position: absolute;
+  bottom: 100%;
+  left: var(--tooltip-left-after-position);
+  right: var(--tooltip-right-after-position);
 
-    // left: 15px;
-    margin-left: -5px;
-    border-width: 5px;
-    border-style: solid;
-    border-color: transparent transparent black transparent;
+  // left: 15px;
+  margin-left: -5px;
+  border-width: 5px;
+  border-style: solid;
+  border-color: transparent transparent black transparent;
 }
 
 .tooltip:hover .tooltiptext {
-    visibility: visible;
+  visibility: visible;
 }
 
 @media screen and (max-width: 600px) {
-    .tooltip .tooltiptext {
-        visibility: hidden;
-        width: 200px;
-    }
+  .tooltip .tooltiptext {
+    visibility: hidden;
+    width: 200px;
+  }
 }

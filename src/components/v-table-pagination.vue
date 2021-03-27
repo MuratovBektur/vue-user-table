@@ -5,7 +5,7 @@
         class="pagination justify-content-center justify-content-md-start justify-content-lg-end"
       >
         <li class="page-item" @click="$emit('set-prev-page')">
-          <a class="page-link" aria-label="Previous">
+          <a class="page-link noselect" aria-label="Previous">
             <span aria-hidden="true">&laquo;</span>
           </a>
         </li>
@@ -15,211 +15,219 @@
             v-for="page of pageCount"
             :key="page"
             class="page-item"
-            :class="{ active: currentPage === page }"
+            :class="{ active: currentPage == page }"
           >
-            <a class="page-link" @click="$emit('set-current-page', page)">{{
-              page
-            }}</a>
+            <a
+              class="page-link noselect"
+              @click="$emit('set-current-page', page)"
+              >{{ page }}</a
+            >
           </li>
         </template>
         <template v-else>
-          <template v-if="currentPage === 1">
+          <template v-if="currentPage == 1">
             <li class="page-item active">
               <a
-                class="page-link"
+                class="page-link noselect"
                 @click="$emit('set-current-page', currentPage)"
                 >{{ currentPage }}</a
               >
             </li>
             <li class="page-item ">
               <a
-                class="page-link"
-                @click="$emit('set-current-page', currentPage + 1)"
-                >{{ currentPage + 1 }}</a
+                class="page-link noselect"
+                @click="$emit('set-current-page', +currentPage + 1)"
+                >{{ +currentPage + 1 }}</a
               >
             </li>
             <li class="page-item">
               <a
-                class="page-link"
-                @click="$emit('set-current-page', currentPage + 2)"
-                >{{ currentPage + 2 }}</a
+                class="page-link noselect"
+                @click="$emit('set-current-page', +currentPage + 2)"
+                >{{ +currentPage + 2 }}</a
               >
             </li>
 
             <li class="page-item">
-              <a class="page-link disabled">...</a>
+              <a class="page-link noselect disabled">...</a>
             </li>
 
             <li class="page-item">
               <a
-                class="page-link"
+                class="page-link noselect"
                 @click="$emit('set-current-page', pageCount)"
                 >{{ pageCount }}</a
               >
             </li>
           </template>
-          <template v-else-if="currentPage === 2">
+          <template v-else-if="currentPage == 2">
             <li class="page-item ">
               <a
-                class="page-link"
+                class="page-link noselect"
                 @click="$emit('set-current-page', currentPage - 1)"
                 >{{ currentPage - 1 }}</a
               >
             </li>
             <li class="page-item active">
               <a
-                class="page-link"
+                class="page-link noselect"
                 @click="$emit('set-current-page', currentPage)"
                 >{{ currentPage }}</a
               >
             </li>
             <li class="page-item">
               <a
-                class="page-link"
-                @click="$emit('set-current-page', currentPage + 1)"
-                >{{ currentPage + 1 }}</a
+                class="page-link noselect"
+                @click="$emit('set-current-page', +currentPage + 1)"
+                >{{ +currentPage + 1 }}</a
               >
             </li>
             <li class="page-item">
-              <a class="page-link disabled">...</a>
+              <a class="page-link noselect disabled">...</a>
             </li>
 
             <li class="page-item">
               <a
-                class="page-link"
+                class="page-link noselect"
                 @click="$emit('set-current-page', pageCount)"
                 >{{ pageCount }}</a
               >
             </li>
           </template>
-          <template v-else-if="currentPage === 3">
+          <template v-else-if="currentPage == 3">
             <li class="page-item ">
               <a
-                class="page-link"
+                class="page-link noselect"
                 @click="$emit('set-current-page', currentPage - 2)"
                 >{{ currentPage - 2 }}</a
               >
             </li>
             <li class="page-item ">
               <a
-                class="page-link"
+                class="page-link noselect"
                 @click="$emit('set-current-page', currentPage - 1)"
                 >{{ currentPage - 1 }}</a
               >
             </li>
             <li class="page-item active">
               <a
-                class="page-link"
+                class="page-link noselect"
                 @click="$emit('set-current-page', currentPage)"
                 >{{ currentPage }}</a
               >
             </li>
             <li class="page-item ">
               <a
-                class="page-link"
-                @click="$emit('set-current-page', currentPage + 1)"
-                >{{ currentPage + 1 }}</a
+                class="page-link noselect"
+                @click="$emit('set-current-page', +currentPage + 1)"
+                >{{ +currentPage + 1 }}</a
               >
             </li>
             <li class="page-item">
-              <a class="page-link disabled">...</a>
+              <a class="page-link noselect disabled">...</a>
             </li>
             <li class="page-item ">
               <a
-                class="page-link"
+                class="page-link noselect"
                 @click="$emit('set-current-page', pageCount)"
                 >{{ pageCount }}</a
               >
             </li>
           </template>
-          <template v-else-if="currentPage === pageCount - 2">
+          <template v-else-if="currentPage == pageCount - 2">
             <li class="page-item ">
-              <a class="page-link" @click="$emit('set-current-page', 1)">{{
-                1
-              }}</a>
+              <a
+                class="page-link noselect"
+                @click="$emit('set-current-page', 1)"
+                >{{ 1 }}</a
+              >
             </li>
             <li class="page-item">
-              <a class="page-link disabled">...</a>
+              <a class="page-link noselect disabled">...</a>
             </li>
             <li class="page-item -1">
               <a
-                class="page-link"
+                class="page-link noselect"
                 @click="$emit('set-current-page', currentPage - 1)"
                 >{{ currentPage - 1 }}</a
               >
             </li>
             <li class="page-item active">
               <a
-                class="page-link"
+                class="page-link noselect"
                 @click="$emit('set-current-page', currentPage)"
                 >{{ currentPage }}</a
               >
             </li>
             <li class="page-item ">
               <a
-                class="page-link"
-                @click="$emit('set-current-page', currentPage + 1)"
-                >{{ currentPage + 1 }}</a
+                class="page-link noselect"
+                @click="$emit('set-current-page', +currentPage + 1)"
+                >{{ +currentPage + 1 }}</a
               >
             </li>
             <li class="page-item ">
               <a
-                class="page-link"
-                @click="$emit('set-current-page', currentPage + 2)"
-                >{{ currentPage + 2 }}</a
+                class="page-link noselect"
+                @click="$emit('set-current-page', +currentPage + 2)"
+                >{{ +currentPage + 2 }}</a
               >
             </li>
           </template>
-          <template v-else-if="currentPage === pageCount - 1">
+          <template v-else-if="currentPage == pageCount - 1">
             <li class="page-item ">
-              <a class="page-link" @click="$emit('set-current-page', 1)">{{
-                1
-              }}</a>
+              <a
+                class="page-link noselect"
+                @click="$emit('set-current-page', 1)"
+                >{{ 1 }}</a
+              >
             </li>
             <li class="page-item">
-              <a class="page-link disabled">...</a>
+              <a class="page-link noselect disabled">...</a>
             </li>
             <li class="page-item ">
               <a
-                class="page-link"
+                class="page-link noselect"
                 @click="$emit('set-current-page', currentPage - 1)"
                 >{{ currentPage - 1 }}</a
               >
             </li>
             <li class="page-item active">
               <a
-                class="page-link"
+                class="page-link noselect"
                 @click="$emit('set-current-page', currentPage)"
                 >{{ currentPage }}</a
               >
             </li>
             <li class="page-item ">
               <a
-                class="page-link"
-                @click="$emit('set-current-page', currentPage + 1)"
-                >{{ currentPage + 1 }}</a
+                class="page-link noselect"
+                @click="$emit('set-current-page', +currentPage + 1)"
+                >{{ +currentPage + 1 }}</a
               >
             </li>
           </template>
-          <template v-else-if="currentPage === pageCount">
+          <template v-else-if="currentPage == pageCount">
             <li class="page-item ">
-              <a class="page-link" @click="$emit('set-current-page', 1)">{{
-                1
-              }}</a>
+              <a
+                class="page-link noselect"
+                @click="$emit('set-current-page', 1)"
+                >{{ 1 }}</a
+              >
             </li>
             <li class="page-item">
-              <a class="page-link disabled">...</a>
+              <a class="page-link noselect disabled">...</a>
             </li>
             <li class="page-item ">
               <a
-                class="page-link"
+                class="page-link noselect"
                 @click="$emit('set-current-page', currentPage - 1)"
                 >{{ currentPage - 1 }}</a
               >
             </li>
             <li class="page-item active">
               <a
-                class="page-link"
+                class="page-link noselect"
                 @click="$emit('set-current-page', currentPage)"
                 >{{ currentPage }}</a
               >
@@ -227,40 +235,42 @@
           </template>
           <template v-else>
             <li class="page-item ">
-              <a class="page-link" @click="$emit('set-current-page', 1)">{{
-                1
-              }}</a>
+              <a
+                class="page-link noselect"
+                @click="$emit('set-current-page', 1)"
+                >{{ 1 }}</a
+              >
             </li>
             <li class="page-item">
-              <a class="page-link disabled">...</a>
+              <a class="page-link noselect disabled">...</a>
             </li>
             <li class="page-item ">
               <a
-                class="page-link"
+                class="page-link noselect"
                 @click="$emit('set-current-page', currentPage - 1)"
                 >{{ currentPage - 1 }}</a
               >
             </li>
             <li class="page-item active">
               <a
-                class="page-link"
+                class="page-link noselect"
                 @click="$emit('set-current-page', currentPage)"
                 >{{ currentPage }}</a
               >
             </li>
             <li class="page-item ">
               <a
-                class="page-link"
-                @click="$emit('set-current-page', currentPage + 1)"
-                >{{ currentPage + 1 }}</a
+                class="page-link noselect"
+                @click="$emit('set-current-page', +currentPage + 1)"
+                >{{ +currentPage + 1 }}</a
               >
             </li>
             <li class="page-item">
-              <a class="page-link disabled">...</a>
+              <a class="page-link noselect disabled">...</a>
             </li>
             <li class="page-item">
               <a
-                class="page-link"
+                class="page-link noselect"
                 @click="$emit('set-current-page', pageCount)"
                 >{{ pageCount }}</a
               >
@@ -269,7 +279,7 @@
         </template>
 
         <li class="page-item" @click="$emit('set-next-page')">
-          <a class="page-link" aria-label="Next">
+          <a class="page-link noselect" aria-label="Next">
             <span aria-hidden="true">&raquo;</span>
           </a>
         </li>
@@ -293,7 +303,7 @@
 export default {
   props: {
     currentPage: {
-      type: Number,
+      type: [Number, String],
       default: 1,
     },
     pageCount: Number,
@@ -342,10 +352,11 @@ export default {
     cursor: auto !important;
   }
 
-  .pagination > .active > a {
+  .pagination > .active > a.page-link {
     color: white;
     background-color: #212529 !important;
     border: solid 1px #212529 !important;
+    z-index: initial;
   }
 
   .pagination > .active > a:hover {

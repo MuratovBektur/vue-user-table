@@ -2,7 +2,7 @@
   <header>
     <nav class="navbar navbar-dark bg-dark">
       <div class="container-fluid">
-        <a class="navbar-brand">User Table</a>
+        <a class="navbar-brand noselect">User Table</a>
         <div class="d-flex">
           <input
             class="form-control me-2"
@@ -37,3 +37,11 @@ export default {
   },
 };
 </script>
+
+<style lang="scss" scoped>
+header {
+  &.navbar-brand {
+    cursor: pointer;
+  }
+}
+</style>

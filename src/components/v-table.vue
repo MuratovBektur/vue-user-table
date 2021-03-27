@@ -10,18 +10,18 @@
                 <i
                   :class="[
                     'bi',
-                    sortBy === 'id asc' ? 'bi-caret-up-fill' : 'bi-caret-up',
+                    sortBy === 'id_asc' ? 'bi-caret-up-fill' : 'bi-caret-up',
                   ]"
-                  @click="sort('id asc')"
+                  @click="sort('id_asc')"
                 ></i>
                 <i
                   :class="[
                     'bi',
-                    sortBy === 'id desc'
+                    sortBy === 'id_desc'
                       ? 'bi-caret-down-fill'
                       : 'bi-caret-down',
                   ]"
-                  @click="sort('id desc')"
+                  @click="sort('id_desc')"
                 ></i>
               </span>
             </div>
@@ -33,20 +33,20 @@
                 <i
                   :class="[
                     'bi',
-                    sortBy === 'firstName asc'
+                    sortBy === 'firstName_asc'
                       ? 'bi-caret-up-fill'
                       : 'bi-caret-up',
                   ]"
-                  @click="sort('firstName asc')"
+                  @click="sort('firstName_asc')"
                 ></i>
                 <i
                   :class="[
                     'bi',
-                    sortBy === 'firstName desc'
+                    sortBy === 'firstName_desc'
                       ? 'bi-caret-down-fill'
                       : 'bi-caret-down',
                   ]"
-                  @click="sort('firstName desc')"
+                  @click="sort('firstName_desc')"
                 ></i>
               </span>
             </div>
@@ -58,20 +58,20 @@
                 <i
                   :class="[
                     'bi',
-                    sortBy === 'lastName asc'
+                    sortBy === 'lastName_asc'
                       ? 'bi-caret-up-fill'
                       : 'bi-caret-up',
                   ]"
-                  @click="sort('lastName asc')"
+                  @click="sort('lastName_asc')"
                 ></i>
                 <i
                   :class="[
                     'bi',
-                    sortBy === 'lastName desc'
+                    sortBy === 'lastName_desc'
                       ? 'bi-caret-down-fill'
                       : 'bi-caret-down',
                   ]"
-                  @click="sort('lastName desc')"
+                  @click="sort('lastName_desc')"
                 ></i>
               </span>
             </div>
@@ -83,18 +83,18 @@
                 <i
                   :class="[
                     'bi',
-                    sortBy === 'email asc' ? 'bi-caret-up-fill' : 'bi-caret-up',
+                    sortBy === 'email_asc' ? 'bi-caret-up-fill' : 'bi-caret-up',
                   ]"
-                  @click="sort('email asc')"
+                  @click="sort('email_asc')"
                 ></i>
                 <i
                   :class="[
                     'bi',
-                    sortBy === 'email desc'
+                    sortBy === 'email_desc'
                       ? 'bi-caret-down-fill'
                       : 'bi-caret-down',
                   ]"
-                  @click="sort('email desc')"
+                  @click="sort('email_desc')"
                 ></i>
               </span>
             </div>
@@ -106,18 +106,18 @@
                 <i
                   :class="[
                     'bi',
-                    sortBy === 'phone asc' ? 'bi-caret-up-fill' : 'bi-caret-up',
+                    sortBy === 'phone_asc' ? 'bi-caret-up-fill' : 'bi-caret-up',
                   ]"
-                  @click="sort('phone asc')"
+                  @click="sort('phone_asc')"
                 ></i>
                 <i
                   :class="[
                     'bi',
-                    sortBy === 'phone desc'
+                    sortBy === 'phone_desc'
                       ? 'bi-caret-down-fill'
                       : 'bi-caret-down',
                   ]"
-                  @click="sort('phone desc')"
+                  @click="sort('phone_desc')"
                 ></i>
               </span>
             </div>
@@ -363,6 +363,13 @@ export default {
     display: flex;
     justify-content: center;
     align-items: center;
+    -webkit-touch-callout: none; /* iOS Safari */
+    -webkit-user-select: none; /* Safari */
+    -khtml-user-select: none; /* Konqueror HTML */
+    -moz-user-select: none; /* Old versions of Firefox */
+    -ms-user-select: none; /* Internet Explorer/Edge */
+    user-select: none; /* Non-prefixed version, currently
+                                    supported by Chrome, Edge, Opera and Firefox */
   }
 }
 @media screen and (max-width: 768px) {
