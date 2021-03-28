@@ -36,7 +36,7 @@
         <div
           v-if="errors.firstName.active"
           id="firstNameHelp"
-          class="form-text  text-danger"
+          class="form-text text-danger"
         >
           {{ errors.firstName.text }}
         </div>
@@ -55,7 +55,7 @@
         <div
           v-if="errors.lastName.active"
           id="lastNameHelp"
-          class="form-text  text-danger"
+          class="form-text text-danger"
         >
           {{ errors.lastName.text }}
         </div>
@@ -76,7 +76,7 @@
         <div
           v-if="errors.email.active"
           id="emailHelp"
-          class="form-text  text-danger"
+          class="form-text text-danger"
         >
           {{ errors.email.text }}
         </div>
@@ -97,13 +97,13 @@
         <div
           v-if="errors.phone.active"
           id="phoneHelp"
-          class="form-text  text-danger"
+          class="form-text text-danger"
         >
           {{ errors.phone.text }}
         </div>
       </div>
 
-      <div class="d-flex justify-content-center ">
+      <div class="d-flex justify-content-center">
         <button
           @click="submit"
           :disabled="!canSubmit"
@@ -212,7 +212,6 @@ export default {
         };
       } else if (prop === "email") {
         const email = this.form.email;
-        console.log(email);
         if (email == null || email === "") {
           this.errors.email.active = true;
           this.errors.email.text =
@@ -232,7 +231,6 @@ export default {
         };
       } else if (prop === "phone") {
         const phone = this.form.phone;
-        console.log("phone", phone);
         if (phone == null || phone === "") {
           this.errors.phone.active = true;
           this.errors.phone.text = "Поле телефона не может быть пустым";

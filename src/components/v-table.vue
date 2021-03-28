@@ -1,6 +1,6 @@
 <template>
   <div class="v-table mt-5 table-responsive-md">
-    <table v-if="users" class="table  table-striped">
+    <table  class="table  table-striped">
       <thead>
         <tr class="table-dark">
           <th scope="col">
@@ -280,11 +280,7 @@
         </tr>
       </tbody>
     </table>
-    <div v-else class="v-table__loading-bar d-flex justify-content-center">
-      <div class="spinner-border" role="status">
-        <span class="visually-hidden">Loading...</span>
-      </div>
-    </div>
+    
     <!-- <a
       data-bs-toggle="tooltip"
       title=""
