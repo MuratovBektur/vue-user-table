@@ -14,7 +14,6 @@
             v-model="searchInput"
             @keyup.enter="onSearch"
           />
-          />
           <button @click="onSearch" class="btn btn-outline-light" type="submit">
             Найти
           </button>
@@ -44,7 +43,7 @@ export default {
 
 <style lang="scss" scoped>
 header {
-  &.navbar-brand {
+  & .navbar-brand {
     cursor: pointer;
   }
 }
